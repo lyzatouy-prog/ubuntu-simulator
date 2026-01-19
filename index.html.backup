@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubuntu Terminal Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fab fa-ubuntu"></i>
+                <h1>Ubuntu Terminal Simulator</h1>
+            </div>
+            <p class="subtitle">Learn Linux commands in a safe environment</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Terminal -->
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="window-controls">
+                        <span class="control close"></span>
+                        <span class="control minimize"></span>
+                        <span class="control maximize"></span>
+                    </div>
+                    <div class="terminal-title">
+                        <i class="fas fa-terminal"></i>
+                        student@ubuntu:~
+                    </div>
+                </div>
+                <div class="terminal-body">
+                    <div class="output" id="terminal-output">
+                        <div class="welcome-message">
+                            <p>Welcome to Ubuntu Terminal Simulator!</p>
+                            <p>Type <span class="command">help</span> for commands list</p>
+                            <p>Type <span class="command">clear</span> to clear terminal</p>
+                        </div>
+                    </div>
+                    <div class="input-line">
+                        <span class="prompt">student@ubuntu:~$</span>
+                        <input type="text" id="command-input" autocomplete="off" autofocus>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Command Reference -->
+            <div class="reference-container">
+                <h2><i class="fas fa-book"></i> Linux Commands</h2>
+                
+                <div class="command-category">
+                    <h3>📁 Basic Commands</h3>
+                    <div class="command-item" onclick="insertCommand('ls')">
+                        <code>ls</code>
+                        <span>List files</span>
+                    </div>
+                    <div class="command-item" onclick="insertCommand('pwd')">
+                        <code>pwd</code>
+                        <span>Current directory</span>
+                    </div>
+                </div>
+
+                <div class="command-category">
+                    <h3>📝 System Info</h3>
+                    <div class="command-item" onclick="insertCommand('date')">
+                        <code>date</code>
+                        <span>Current date/time</span>
+                    </div>
+                    <div class="command-item" onclick="insertCommand('whoami')">
+                        <code>whoami</code>
+                        <span>Current user</span>
+                    </div>
+                </div>
+
+                <div class="quick-commands">
+                    <h3>💡 Try These:</h3>
+                    <button onclick="runDemoCommand('help')">help</button>
+                    <button onclick="runDemoCommand('date')">date</button>
+                    <button onclick="runDemoCommand('clear')">clear</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubuntu Linux Terminal Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fab fa-ubuntu"></i>
+                    <div class="logo-text">
+                        <h1>Ubuntu Linux Terminal Simulator</h1>
+                        <p class="subtitle">Interactive Linux Learning Environment</p>
+                    </div>
+                </div>
+                <div class="stats">
+                    <span class="stat"><i class="fas fa-code"></i> 50+ Commands</span>
+                    <span class="stat"><i class="fas fa-graduation-cap"></i> ITC Cambodia</span>
+                    <span class="stat"><i class="fas fa-server"></i> Ubuntu Server</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard">
+            <!-- Left: Terminal -->
+            <div class="terminal-section">
+                <div class="terminal-wrapper">
+                    <div class="terminal-header">
+                        <div class="window-controls">
+                            <span class="control close"></span>
+                            <span class="control minimize"></span>
+                            <span class="control maximize"></span>
+                        </div>
+                        <div class="terminal-info">
+                            <i class="fas fa-terminal"></i>
+                            <span id="current-path">student@ubuntu:~/projects</span>
+                            <span class="connection-status">
+                                <i class="fas fa-wifi"></i> Connected
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="terminal-body">
+                        <div class="output-container" id="terminal-output">
+                            <!-- Welcome message will be loaded here -->
+                        </div>
+                        
+                        <div class="input-container">
+                            <div class="prompt-line">
+                                <span class="prompt-user">student@ubuntu</span>
+                                <span class="prompt-colon">:</span>
+                                <span class="prompt-path" id="current-dir">~/projects</span>
+                                <span class="prompt-symbol">$</span>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" id="command-input" 
+                                       placeholder="Type command or click from panel..." 
+                                       autocomplete="off" 
+                                       autofocus>
+                                <button id="clear-btn" title="Clear terminal">
+                                    <i class="fas fa-broom"></i>
+                                </button>
+                                <button id="help-btn" title="Show help">
+                                    <i class="fas fa-question-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="terminal-footer">
+                        <div class="status-bar">
+                            <span id="command-count">0 commands executed</span>
+                            <span id="current-time">--:--:--</span>
+                            <span id="system-status">
+                                <i class="fas fa-circle" style="color: #4CAF50;"></i> System OK
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="runDemoCommand('system-info')">
+                            <i class="fas fa-info-circle"></i> System Info
+                        </button>
+                        <button class="action-btn" onclick="runDemoCommand('network-check')">
+                            <i class="fas fa-network-wired"></i> Network
+                        </button>
+                        <button class="action-btn" onclick="runDemoCommand('process-list')">
+                            <i class="fas fa-tasks"></i> Processes
+                        </button>
+                        <button class="action-btn" onclick="clearTerminal()">
+                            <i class="fas fa-broom"></i> Clear All
+                        </button>
+                        <button class="action-btn" onclick="runTutorial()">
+                            <i class="fas fa-play-circle"></i> Tutorial
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Command Panels -->
+            <div class="panels-section">
+                <!-- Search Box -->
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="command-search" 
+                           placeholder="Search commands... (ls, grep, chmod)">
+                </div>
+
+                <!-- Navigation Tabs -->
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('basic')">
+                        <i class="fas fa-star"></i> Basic
+                    </button>
+                    <button class="tab" onclick="showTab('files')">
+                        <i class="fas fa-folder"></i> Files
+                    </button>
+                    <button class="tab" onclick="showTab('system')">
+                        <i class="fas fa-cogs"></i> System
+                    </button>
+                    <button class="tab" onclick="showTab('network')">
+                        <i class="fas fa-network-wired"></i> Network
+                    </button>
+                    <button class="tab" onclick="showTab('dev')">
+                        <i class="fas fa-code"></i> Dev Tools
+                    </button>
+                </div>
+
+                <!-- Basic Commands Panel -->
+                <div class="panel active" id="basic-panel">
+                    <h3><i class="fas fa-star"></i> Essential Commands</h3>
+                    <div class="command-grid">
+                        <div class="command-card" onclick="insertCommand('pwd')">
+                            <div class="command-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>pwd</code>
+                                <p>Print working directory</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('ls -la')">
+                            <div class="command-icon">
+                                <i class="fas fa-list"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>ls -la</code>
+                                <p>List all files (detailed)</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('whoami')">
+                            <div class="command-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>whoami</code>
+                                <p>Current user</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('date')">
+                            <div class="command-icon">
+                                <i class="far fa-clock"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>date</code>
+                                <p>Current date & time</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('history')">
+                            <div class="command-icon">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>history</code>
+                                <p>Command history</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('clear')">
+                            <div class="command-icon">
+                                <i class="fas fa-broom"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>clear</code>
+                                <p>Clear terminal</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('man ls')">
+                            <div class="command-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>man [command]</code>
+                                <p>Manual pages</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('echo "Hello Ubuntu"')">
+                            <div class="command-icon">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>echo</code>
+                                <p>Print text</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Operations Panel -->
+                <div class="panel" id="files-panel">
+                    <h3><i class="fas fa-folder"></i> File Operations</h3>
+                    <div class="command-grid">
+                        <div class="command-card" onclick="insertCommand('touch file.txt')">
+                            <div class="command-icon">
+                                <i class="far fa-file"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>touch</code>
+                                <p>Create empty file</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('mkdir new_folder')">
+                            <div class="command-icon">
+                                <i class="fas fa-folder-plus"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>mkdir</code>
+                                <p>Create directory</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('cp file.txt backup.txt')">
+                            <div class="command-icon">
+                                <i class="fas fa-copy"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>cp</code>
+                                <p>Copy files</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('mv old.txt new.txt')">
+                            <div class="command-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>mv</code>
+                                <p>Move/rename files</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('rm file.txt')">
+                            <div class="command-icon">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>rm</code>
+                                <p>Remove file</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('cat file.txt')">
+                            <div class="command-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>cat</code>
+                                <p>View file content</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('nano file.txt')">
+                            <div class="command-icon">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>nano</code>
+                                <p>Text editor</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('find . -name "*.txt"')">
+                            <div class="command-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>find</code>
+                                <p>Search files</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('grep "text" file.txt')">
+                            <div class="command-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>grep</code>
+                                <p>Search text</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('chmod 755 script.sh')">
+                            <div class="command-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>chmod</code>
+                                <p>Change permissions</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('chown user:group file.txt')">
+                            <div class="command-icon">
+                                <i class="fas fa-user-tag"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>chown</code>
+                                <p>Change owner</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('tar -czf archive.tar.gz folder/')">
+                            <div class="command-icon">
+                                <i class="fas fa-archive"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>tar</code>
+                                <p>Archive files</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Info Panel -->
+                <div class="panel" id="system-panel">
+                    <h3><i class="fas fa-cogs"></i> System Information</h3>
+                    <div class="command-grid">
+                        <div class="command-card" onclick="insertCommand('uname -a')">
+                            <div class="command-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>uname -a</code>
+                                <p>Kernel & system info</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('df -h')">
+                            <div class="command-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>df -h</code>
+                                <p>Disk space (human)</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('free -h')">
+                            <div class="command-icon">
+                                <i class="fas fa-memory"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>free -h</code>
+                                <p>Memory usage</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('top -n 1')">
+                            <div class="command-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>top</code>
+                                <p>Process monitor</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('ps aux | head -20')">
+                            <div class="command-icon">
+                                <i class="fas fa-list-ol"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>ps aux</code>
+                                <p>Running processes</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('uptime')">
+                            <div class="command-icon">
+                                <i class="fas fa-hourglass-half"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>uptime</code>
+                                <p>System uptime</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('lscpu')">
+                            <div class="command-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>lscpu</code>
+                                <p>CPU information</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('lsblk')">
+                            <div class="command-icon">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>lsblk</code>
+                                <p>Block devices</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('lshw -short')">
+                            <div class="command-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>lshw</code>
+                                <p>Hardware info</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('sudo apt update')">
+                            <div class="command-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>apt update</code>
+                                <p>Update packages</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('sudo apt upgrade')">
+                            <div class="command-icon">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>apt upgrade</code>
+                                <p>Upgrade system</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('systemctl status')">
+                            <div class="command-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>systemctl</code>
+                                <p>Service manager</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Network Panel -->
+                <div class="panel" id="network-panel">
+                    <h3><i class="fas fa-network-wired"></i> Network Commands</h3>
+                    <div class="command-grid">
+                        <div class="command-card" onclick="insertCommand('ifconfig')">
+                            <div class="command-icon">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>ifconfig</code>
+                                <p>Network interfaces</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('ping google.com')">
+                            <div class="command-icon">
+                                <i class="fas fa-satellite-dish"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>ping</code>
+                                <p>Test connectivity</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('netstat -tulpn')">
+                            <div class="command-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>netstat</code>
+                                <p>Network connections</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('ss -tulpn')">
+                            <div class="command-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>ss</code>
+                                <p>Socket statistics</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('curl https://api.github.com')">
+                            <div class="command-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>curl</code>
+                                <p>Transfer data</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('wget https://example.com/file.zip')">
+                            <div class="command-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>wget</code>
+                                <p>Download files</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('nslookup google.com')">
+                            <div class="command-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>nslookup</code>
+                                <p>DNS lookup</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('dig google.com')">
+                            <div class="command-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>dig</code>
+                                <p>DNS information</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('traceroute google.com')">
+                            <div class="command-icon">
+                                <i class="fas fa-route"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>traceroute</code>
+                                <p>Network route</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('hostname')">
+                            <div class="command-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>hostname</code>
+                                <p>System hostname</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Development Panel -->
+                <div class="panel" id="dev-panel">
+                    <h3><i class="fas fa-code"></i> Development Tools</h3>
+                    <div class="command-grid">
+                        <div class="command-card" onclick="insertCommand('git status')">
+                            <div class="command-icon">
+                                <i class="fab fa-git"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>git status</code>
+                                <p>Git repository status</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('python3 --version')">
+                            <div class="command-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>python3</code>
+                                <p>Python version</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('node --version')">
+                            <div class="command-icon">
+                                <i class="fab fa-node-js"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>node</code>
+                                <p>Node.js version</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('docker ps')">
+                            <div class="command-icon">
+                                <i class="fab fa-docker"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>docker ps</code>
+                                <p>Docker containers</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('npm --version')">
+                            <div class="command-icon">
+                                <i class="fab fa-npm"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>npm</code>
+                                <p>Node package manager</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('java --version')">
+                            <div class="command-icon">
+                                <i class="fab fa-java"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>java</code>
+                                <p>Java version</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('gcc --version')">
+                            <div class="command-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>gcc</code>
+                                <p>GCC compiler</p>
+                            </div>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('make --version')">
+                            <div class="command-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="command-info">
+                                <code>make</code>
+                                <p>Build tool</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-info-circle"></i> About This Simulator</h4>
+                    <p>This is a safe, interactive environment to learn Ubuntu Linux commands. No real commands are executed on your system.</p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-graduation-cap"></i> Educational Project</h4>
+                    <p>Created by ITC Student - Cambodia<br>
+                    For Operating Systems Course<br>
+                    Ubuntu Server & Web Services</p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-link"></i> Links</h4>
+                    <div class="footer-links">
+                        <a href="https://ubuntu.com" target="_blank">
+                            <i class="fab fa-ubuntu"></i> Ubuntu Official
+                        </a>
+                        <a href="https://github.com" target="_blank">
+                            <i class="fab fa-github"></i> GitHub Repository
+                        </a>
+                        <a href="https://linuxjourney.com" target="_blank">
+                            <i class="fas fa-book"></i> Linux Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Ubuntu Terminal Simulator | Made with <i class="fas fa-heart" style="color: #e91e63;"></i> for ITC Cambodia</p>
+                <p class="server-info">
+                    <i class="fas fa-server"></i> Simulated Ubuntu 22.04 LTS Server
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="commands.js"></script>
+</body>
+</html>         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
