@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubuntu Linux Terminal Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fab fa-ubuntu"></i>
+                <h1>Ubuntu Terminal Simulator</h1>
+                <p class="subtitle">Interactive Linux Learning Environment</p>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Terminal Section -->
+            <div class="terminal-section">
+                <div class="terminal-wrapper">
+                    <div class="terminal-header">
+                        <div class="window-controls">
+                            <span class="control close"></span>
+                            <span class="control minimize"></span>
+                            <span class="control maximize"></span>
+                        </div>
+                        <div class="terminal-title">
+                            <i class="fas fa-terminal"></i>
+                            student@ubuntu:~/projects
+                        </div>
+                    </div>
+                    
+                    <div class="terminal-body">
+                        <div class="output-container" id="terminal-output">
+                            <!-- Output appears here -->
+                        </div>
+                        
+                        <!-- ONLY ONE INPUT AREA -->
+                        <div class="input-container">
+                            <div class="prompt-line">
+                                <span class="prompt-user">student@ubuntu</span>
+                                <span class="prompt-colon">:</span>
+                                <span class="prompt-path">~/projects</span>
+                                <span class="prompt-symbol">$</span>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" id="command-input" 
+                                       placeholder="Type command or click from panel..." 
+                                       autocomplete="off" 
+                                       autofocus>
+                                <button id="clear-btn" title="Clear terminal">
+                                    <i class="fas fa-broom"></i>
+                                </button>
+                                <button id="help-btn" title="Show help">
+                                    <i class="fas fa-question-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Command Panels (Right Side) -->
+            <div class="panels-section">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="command-search" 
+                           placeholder="Search commands...">
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('basic')">Basic</button>
+                    <button class="tab" onclick="showTab('files')">Files</button>
+                    <button class="tab" onclick="showTab('system')">System</button>
+                </div>
+
+                <div class="panel active" id="basic-panel">
+                    <h3>Basic Commands</h3>
+                    <div class="command-grid">
+                        <div class="command-card" onclick="insertCommand('help')">
+                            <code>help</code>
+                            <p>Show all commands</p>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('ls')">
+                            <code>ls</code>
+                            <p>List files</p>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('pwd')">
+                            <code>pwd</code>
+                            <p>Current directory</p>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('date')">
+                            <code>date</code>
+                            <p>Current date/time</p>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('whoami')">
+                            <code>whoami</code>
+                            <p>Show username</p>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('clear')">
+                            <code>clear</code>
+                            <p>Clear terminal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel" id="files-panel">
+                    <h3>File Commands</h3>
+                    <div class="command-grid">
+                        <div class="command-card" onclick="insertCommand('touch file.txt')">
+                            <code>touch</code>
+                            <p>Create file</p>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('mkdir folder')">
+                            <code>mkdir</code>
+                            <p>Create directory</p>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('cat file.txt')">
+                            <code>cat</code>
+                            <p>View file</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel" id="system-panel">
+                    <h3>System Commands</h3>
+                    <div class="command-grid">
+                        <div class="command-card" onclick="insertCommand('uname -a')">
+                            <code>uname -a</code>
+                            <p>System info</p>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('df -h')">
+                            <code>df -h</code>
+                            <p>Disk space</p>
+                        </div>
+                        <div class="command-card" onclick="insertCommand('free -h')">
+                            <code>free -h</code>
+                            <p>Memory usage</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Ubuntu Terminal Simulator - ITC Cambodia</p>
+        </footer>
+    </div>
+
+    <script src="commands.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

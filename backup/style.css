@@ -1,0 +1,261 @@
+/* Simple Clean Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.logo i {
+    font-size: 3rem;
+    color: #E95420;
+}
+
+.logo h1 {
+    font-size: 2rem;
+    color: #333;
+    margin: 10px 0;
+}
+
+.subtitle {
+    color: #666;
+}
+
+/* Main Content */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Terminal */
+.terminal-wrapper {
+    background: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.close { background: #ff5f56; }
+.minimize { background: #ffbd2e; }
+.maximize { background: #27ca3f; }
+
+.terminal-title {
+    color: #aaa;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.terminal-title i {
+    color: #4CAF50;
+    margin-right: 8px;
+}
+
+.terminal-body {
+    padding: 20px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.output-container {
+    flex: 1;
+    overflow-y: auto;
+    color: #f0f0f0;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 20px;
+}
+
+/* SINGLE INPUT AREA */
+.input-container {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.prompt-line {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    color: #4CAF50;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+#command-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    padding: 8px;
+    outline: none;
+}
+
+#command-input::placeholder {
+    color: #888;
+}
+
+.input-wrapper button {
+    background: #444;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Panels */
+.panels-section {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.search-box {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+#command-search {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    flex: 1;
+    background: #f5f5f5;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.tab.active {
+    background: #E95420;
+    color: white;
+}
+
+.panel {
+    display: none;
+}
+
+.panel.active {
+    display: block;
+}
+
+.command-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.command-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+.command-card:hover {
+    border-color: #E95420;
+}
+
+.command-card code {
+    display: block;
+    background: #333;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    font-family: 'Courier New', monospace;
+}
+
+.command-card p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Footer */
+.footer {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    color: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
